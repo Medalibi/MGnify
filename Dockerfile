@@ -86,6 +86,7 @@ COPY ./soil_comparison.R /usr/local/soil_comparison.R
 COPY ./pkg_install.R /usr/local/pkg_install.R
 RUN Rscript /usr/local/pkg_install.R \
     && chmod 777 /usr/local/soil_comparison.R \
+    && ln -s /usr/local/soil_comparison.R /usr/local/bin/ \
     && chmod 777 -R /usr/local/lib/R/ \
     && chmod 777 -R /usr/lib/R/ \
     && chmod 777 -R /usr/share/R/
