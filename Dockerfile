@@ -5,18 +5,18 @@
 ### To run the container for the first time with generic graphics:
 # xhost +
 # docker run -it --rm -v /tmp/.X11-unix:/tmp/.X11-unix:rw --privileged -e DISPLAY=unix$DISPLAY \
-# -v $HOME/:/home/training/ --device /dev/dri --privileged --name mgnifty ebitraining/highthroughput
+# -v $HOME/:/home/training/ --device /dev/dri --privileged --name mgnify ebitraining/metgenomics:mgnify
 #
 ## To run with Nvidia graphics, add the following option:
 # "-v /usr/lib/nvidia-340:/usr/lib/nvidia-340 -v /usr/lib32/nvidia-340:/usr/lib32/nvidia-340"
 #
 ### To resume using an container:
-# docker exec -it mgnifty /bin/bash
+# docker exec -it mgnify /bin/bash
 #
 ### To build the container:
-# docker build -f ./Dockerfile -t mgnifty .
-# docker tag mgnifty ebitraining/metagenomics:mgnifty
-# docker push ebitraining/metagenomics:mgnifty
+# docker build -f ./Dockerfile -t mgnify .
+# docker tag mgnify ebitraining/metagenomics:mgnify
+# docker push ebitraining/metagenomics:mgnify
 #
 #########
 
@@ -49,13 +49,17 @@ RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-de
     libxcomposite1 libtiff5 libqt5widgets5 libqt5webkit5 libssl-dev python3 mesa-common-dev libxml2-dev \
     libcurses-ocaml-dev libgl1-mesa-dri libgl1-mesa-glx mesa-utils fcitx-frontend-qt5 libqt5gui5 gdebi \
     fcitx-modules fcitx-module-dbus libedit2 libqt5core5a libqt5dbus5 libqt5network5 libqt5printsupport5 \
-    default-jre default-jre-headless expect libcurl4 libcurl4-openssl-dev python python3 curl libopenblas-dev \
-    libopenblas-base libgsl-dev liblapacke liblapacke-dev openjfx \
+    default-jre default-jre-headless expect libcurl4 libcurl4-openssl-dev python-pip python3-pip curl \
+    libopenblas-base libgsl-dev liblapacke liblapacke-dev openjfx libopenblas-dev \
     openssl libssl-dev manpages vim \
     && update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java \
     && echo "en_GB.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen en_GB.utf8 \
     && /usr/sbin/update-locale LANG=en_GB.UTF-8
+
+# Install mg-toolkit
+########
+RUN pip3 install -U mg-toolkit
 
 # Install R CRAN
 ########
