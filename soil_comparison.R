@@ -3,6 +3,11 @@
 # biocLite("ALDEx2")
 # biocLite("ggplot2")
 
+if (!requireNamespace("BiocManager"))
+    install.packages("BiocManager")
+BiocManager::install(ask=FALSE)
+BiocManager::install(c("ALDEx2","gplots","ggplot2"), ask=FALSE)
+
 # load the libraries
 library(ALDEx2)
 library(ggplot2)
