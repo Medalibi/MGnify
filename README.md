@@ -1,4 +1,4 @@
-# MGnify
+# Metagenomics MGnify
 Docker files for Metagenomics Bioinformatics MGnify session.
 
 ## To run the container for the first time with generic graphics:
