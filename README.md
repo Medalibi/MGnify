@@ -5,8 +5,8 @@ Docker files for Metagenomics Bioinformatics MGnify session.
 ```
 xhost +
 docker run -it -v /tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY=unix$DISPLAY \
--v $HOME/:/home/training/ --device /dev/dri --privileged --name mgnifty \
-ebitraining/metagenomics:mgnifty
+-v $HOME/:/home/training/ --device /dev/dri --privileged --name mgnify \
+ebitraining/metagenomics:mgnify
 ```
 ## To run with Nvidia graphics, add the following option:
 ```
@@ -14,11 +14,11 @@ ebitraining/metagenomics:mgnifty
 ```
 ## To resume using an container:
 ```
-docker exec -it mgnifty /bin/bash
+docker exec -it mgnify /bin/bash
 ```
 ## To build the container:
 ```
-docker build -f ./Dockerfile -t mgnifty .
-docker tag mgnifty ebitraining/metagenomics:mgnifty
-docker push ebitraining/metagenomics:mgnifty
+docker build -f ./Dockerfile -t mgnify .
+docker tag mgnify ebitraining/metagenomics:mgnify
+docker push ebitraining/metagenomics:mgnify
 ```
