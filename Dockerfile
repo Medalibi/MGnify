@@ -80,14 +80,6 @@ RUN echo 'options(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.m
     && chmod 777 -R /usr/lib/R/ \
     && chmod 777 -R /usr/share/R/
 
-# Install R downloaded_packages
-########
-COPY ./soil_comparison.R /usr/local/soil_comparison.R
-RUN Rscript /usr/local/soil_comparison.R \
-    && chmod 777 -R /usr/local/lib/R/ \
-    && chmod 777 -R /usr/lib/R/ \
-    && chmod 777 -R /usr/share/R/
-
 # Install MEGAN6 Community
 ########
 ADD http://ab.inf.uni-tuebingen.de/data/software/megan6/download/MEGAN_Community_unix_6_12_0.sh /usr/local/MEGAN.sh
@@ -110,3 +102,9 @@ RUN chown -R training:training $HOME \
 
 WORKDIR $HOME
 USER training
+
+# Install R downloaded_packages
+########
+COPY ./soil_comparison.R /home/training/soil_comparison.R
+RUN mkdir -p /home/training/Downloads \
+    && Rscript /home/training/soil_comparison.R
