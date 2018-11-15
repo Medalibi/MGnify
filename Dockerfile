@@ -82,12 +82,13 @@ RUN echo 'options(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.m
 
 # Install R downloaded_packages
 ########
+COPY ./soil_comparison.R /usr/local/soil_comparison.R
 COPY ./pkg_install.R /usr/local/pkg_install.R
 RUN Rscript /usr/local/pkg_install.R \
+    && chmod 777 /usr/local/soil_comparison.R \
     && chmod 777 -R /usr/local/lib/R/ \
     && chmod 777 -R /usr/lib/R/ \
     && chmod 777 -R /usr/share/R/
-
 
 # Install MEGAN6 Community
 ########
