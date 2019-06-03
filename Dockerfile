@@ -51,7 +51,7 @@ RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-de
     fcitx-modules fcitx-module-dbus libedit2 libqt5core5a libqt5dbus5 libqt5network5 libqt5printsupport5 \
     default-jre default-jre-headless expect libcurl4 libcurl4-openssl-dev python-pip python3-pip curl \
     libopenblas-base libgsl-dev liblapacke liblapacke-dev openjfx libopenblas-dev \
-    openssl libssl-dev manpages vim \
+    openssl libssl-dev manpages vim libcurl4-gnutls-dev libgtk2.0-dev libglib2.0-dev libreadline6-dev libsqlite3-dev \
     && update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java \
     && echo "en_GB.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen en_GB.utf8 \
@@ -94,6 +94,21 @@ RUN Rscript /usr/local/pkg_install.R \
     && chmod 777 -R /usr/local/lib/R/ \
     && chmod 777 -R /usr/lib/R/ \
     && chmod 777 -R /usr/share/R/
+
+# Install Perl libs
+########
+RUN cpan install JSON:API DDP 
+
+# Install SeqTools
+########
+ADD ftp://ftp.sanger.ac.uk/pub/resources/software/seqtools/PRODUCTION/seqtools-4.44.1.tar.gz /usr/local/seqtools-4.44.1.tar.gz
+RUN tar xvf /usr/local/seqtools-4.44.1.tar.gz -C /usr/local/ \
+    && chmod 777 -R /usr/local/seqtools-4.44.1 \
+    && cd /usr/local/seqtools-4.44.1 \
+    && ./configure \
+    && make \
+    && make install \
+    && rm /usr/local/seqtools-4.44.1.tar.gz
 
 # Install MEGAN6 Community
 ########
