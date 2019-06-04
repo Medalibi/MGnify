@@ -101,7 +101,7 @@ RUN cpan install JSON:API DDP; exit 0
 
 # Install SeqTools
 ########
-ADD ftp://ftp.sanger.ac.uk/pub/resources/software/seqtools/PRODUCTION/seqtools-4.44.1.tar.gz /usr/local/seqtools-4.44.1.tar.gz
+COPY ./seqtools-4.44.1.tar.gz /usr/local/seqtools-4.44.1.tar.gz
 RUN tar xvf /usr/local/seqtools-4.44.1.tar.gz -C /usr/local/ \
     && chmod 777 -R /usr/local/seqtools-4.44.1 \
     && cd /usr/local/seqtools-4.44.1 \
