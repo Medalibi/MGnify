@@ -97,7 +97,7 @@ RUN Rscript /usr/local/pkg_install.R \
 
 # Install Perl libs
 ########
-RUN cpan install JSON:API DDP 
+RUN cpan install JSON:API DDP; exit 0
 
 # Install SeqTools
 ########
