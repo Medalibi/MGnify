@@ -20,7 +20,7 @@
 #
 #########
 
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 LABEL author="Mohamed Alibi" \
 description="Docker image for Metagenomics Bioinformatics MGnify session." \
 maintainer="Mohamed Alibi <alibi@ebi.ac.uk>"
@@ -39,8 +39,8 @@ RUN apt-get update \
     && apt-get install -y gnupg gdebi expect \
     && locale-gen en_GB.UTF-8
 
-ADD https://download1.rstudio.org/rstudio-xenial-1.1.456-amd64.deb /usr/local/rstudio.deb
-RUN echo "deb http://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/" >> /etc/apt/sources.list \
+ADD https://download1.rstudio.org/desktop/xenial/amd64/rstudio-1.2.1335-amd64.deb /usr/local/rstudio.deb
+RUN echo "deb http://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/" >> /etc/apt/sources.list \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 
 RUN apt-get update; apt-get install -y build-essential ca-certificates libbz2-dev liblzma-dev gfortran \
@@ -112,7 +112,7 @@ RUN tar xvf /usr/local/seqtools-4.44.1.tar.gz -C /usr/local/ \
 
 # Install MEGAN6 Community
 ########
-ADD http://ab.inf.uni-tuebingen.de/data/software/megan6/download/MEGAN_Community_unix_6_12_0.sh /usr/local/MEGAN.sh
+ADD http://ab.inf.uni-tuebingen.de/data/software/megan6/download/MEGAN_Community_unix_6_15_2.sh /usr/local/MEGAN.sh
 RUN chmod 777 /usr/local/MEGAN.sh \
     && /usr/local/MEGAN.sh -q -dir /usr/local/MEGAN \
     && ln -s /usr/local/MEGAN/MEGAN /usr/local/bin/megan \
